@@ -1,15 +1,29 @@
 package com.ecommerce.project.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+
+
+@Entity(name = "categories")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter@Setter
 public class Category {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
 
-    private String categoryName;
 
-    public Category(Long categoryId, String categoryName) {
-        this.categoryId = categoryId;
-        this.categoryName = categoryName;
-    }
+    @Size(min = 5, message = "Category must contain atleast 5 categories")
+    @NotBlank
+    private String categoryName;
 
     public Long getCategoryId() {
         return categoryId;
@@ -19,11 +33,12 @@ public class Category {
         this.categoryId = categoryId;
     }
 
-    public String getCategoryName() {
+    public @Size(min = 5, message = "Category must contain atleast 5 categories") @NotBlank String getCategoryName() {
         return categoryName;
     }
 
-    public void setCategoryName(String categoryName) {
+    public void setCategoryName(@Size(min = 5, message = "Category must contain atleast 5 categories") @NotBlank String categoryName) {
         this.categoryName = categoryName;
     }
 }
+
